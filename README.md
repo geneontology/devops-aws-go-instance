@@ -7,6 +7,7 @@ The example below how to import this module and display the elastic public ip of
 ```
 module "go_instance" {
   source = "git::https://github.com/geneontology/devops-aws-go-instance.git"
+  instance_type = "t2.micro"
   public_key_path = "~/.ssh/id_rsa.pub"
   tags =  { Name = "test-my-go-instance" }
   open_ports = [80, 22]
