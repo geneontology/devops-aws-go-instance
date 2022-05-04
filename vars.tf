@@ -2,6 +2,16 @@ variable "tags" {
   type = map
 }
 
+variable vpc_id {
+  type = string
+  description = "ID of an existing VPC."
+}
+
+variable subnet_id {
+  type = string
+  description = "ID of an existing subnet"
+}
+
 variable "region" {
   default = "us-east-1"
 }
