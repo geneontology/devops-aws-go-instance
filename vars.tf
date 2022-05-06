@@ -5,11 +5,13 @@ variable "tags" {
 variable vpc_id {
   type = string
   description = "ID of an existing VPC."
+  default = "vpc-0926e26ef0721bf97"
 }
 
 variable subnet_id {
   type = string
   description = "ID of an existing subnet"
+  default = "subnet-0a09e8ea837f8606b"
 }
 
 variable "region" {
