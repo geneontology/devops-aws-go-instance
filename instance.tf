@@ -2,7 +2,7 @@ resource "aws_instance" "go_instance" {
   ami                    = var.ami
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.go_instance_sg.id]
-  subnet_id              = aws_subnet.go_instance_public_subnet.id
+  subnet_id              = var.subnet_id
   key_name               = aws_key_pair.ssh_key.key_name
   tags                   = var.tags
 

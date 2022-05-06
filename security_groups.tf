@@ -1,5 +1,5 @@
 resource "aws_security_group" "go_instance_sg" {
-  vpc_id = aws_vpc.go_instance_vpc.id
+  vpc_id = var.vpc_id 
   tags   = var.tags
 
   dynamic "ingress" {
