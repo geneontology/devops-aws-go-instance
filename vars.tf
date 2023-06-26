@@ -40,3 +40,9 @@ variable "public_key_path" {
 variable "open_ports" {
   type    = list(number)
 }
+
+variable "use_elastic_ip" {
+  type = bool
+  description = "whether to use an elastic ip or not"
+  default = true 
+}
