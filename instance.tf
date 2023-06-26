@@ -22,11 +22,13 @@ resource "aws_instance" "go_instance" {
 }
 
 resource "aws_eip" "go_instance_eip" {
-  vpc  = true
-  tags = var.tags
+  vpc   = true
+  tags  = var.tags
+  count = "${var.use_elastic_ip == true ? 1 : 0}"
 }
 
 resource "aws_eip_association" "eip_assoc" {
   instance_id   = aws_instance.go_instance.id
-  allocation_id = aws_eip.go_instance_eip.id
+  allocation_id = aws_eip.go_instance_eip[0].id
+  count = "${var.use_elastic_ip == true ? 1 : 0}"
 }
