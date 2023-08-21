@@ -46,3 +46,16 @@ variable "use_elastic_ip" {
   description = "whether to use an elastic ip or not"
   default = true 
 }
+
+// optional will be created if value is not an menty string
+variable "dns_record_name" {
+  type = string 
+  description = "type A DNS record wich will be mapped to public ip"
+  default = ""  
+}
+
+variable "dns_zone_id" {
+  type = string 
+  description = "zone id for dns record."
+  default = ""  
+}
