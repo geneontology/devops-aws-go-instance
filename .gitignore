@@ -1,0 +1,5 @@
+.terraform.lock.hcl
+.terraform
+terraform.tfstate.d
+go_deploy.egg-info
+provider.tf
