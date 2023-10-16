@@ -4,6 +4,8 @@ terraform --version
 cp github/provider.tf .
 
 terraform init
+ls /tmp/
+exit 0
 
 terraform apply -var 'tags={ Name = "cicd-test-go-aws-instance-module" }' -auto-approve
 terraform show
