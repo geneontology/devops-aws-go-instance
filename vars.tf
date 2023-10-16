@@ -1,5 +1,6 @@
 variable "tags" {
   type = map
+  default = { Name = "change-me-go-instance-tags" }
 }
 
 variable vpc_id {
@@ -30,21 +31,24 @@ variable "ami" {
 variable "disk_size" {
   type = number 
   description = "size of disk in Gigabytes"
+  default = 10
 }
 
 variable "public_key_path" {
   type = string 
   description = "path to ssh public key"
+  default = "/tmp/go-ssh.pub"
 }
 
 variable "open_ports" {
   type    = list(number)
+  default = [22]
 }
 
 variable "use_elastic_ip" {
   type = bool
   description = "whether to use an elastic ip or not"
-  default = true 
+  default = false 
 }
 
 // optional

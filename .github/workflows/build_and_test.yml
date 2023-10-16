@@ -1,0 +1,46 @@
+name: Build And Test 
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches:
+      - main 
+  workflow_dispatch:
+
+env:
+  terraform_image: go-devops-base:terraform
+
+jobs:
+  DockerBuildAndTest:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: false
+          load: true
+          tags: ${{ env.terraform_image }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+
+      - name: Test Provisioning on AWS 
+        run: |
+          docker run --rm \
+              -e GEN_SSH_KEYS=1 \
+              -e AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }} -e AWS_ACCESS_SECRET=${{ secrets.AWS_ACCESS_SECRET }} \
+              -t ${{ env.terraform_image }} ./github/run.sh 
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
